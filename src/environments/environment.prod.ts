@@ -11,5 +11,6 @@ export const environment = {
   },
 
   REDIRECT_BOARD: '/board',
-  REDIRECT_LOGIN: '/login'
+  REDIRECT_LOGIN: '/login',
+  REDIRECT_DASHBOARD: '/dashboard'
 };

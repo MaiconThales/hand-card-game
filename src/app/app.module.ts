@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import  {   BoardComponent, 
             LoginComponent, 
             NotAccessComponent,
-            TollBarComponent
+            TollBarComponent,
+            DashboardComponent
         } 
 from 'src/app/components/index';
 
@@ -22,6 +23,8 @@ import { USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Config
 import { environment as e } from 'src/environments/environment.prod';
@@ -32,7 +35,8 @@ import { environment as e } from 'src/environments/environment.prod';
     BoardComponent,
     LoginComponent,
     NotAccessComponent,
-    TollBarComponent
+    TollBarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { environment as e } from 'src/environments/environment.prod';
     FlexLayoutModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: USE_DEVICE_LANGUAGE, useValue: true }

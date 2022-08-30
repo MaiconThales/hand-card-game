@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { first, tap } from 'rxjs/operators';
 
-import { ToolBarServiceService } from 'src/app/services';
+import { ToolBarServiceService, LookForMathServiceService } from 'src/app/services';
+
+import { User } from 'src/app/models';
 
 import { environment as e } from 'src/environments/environment.prod';
 
@@ -14,23 +17,67 @@ import { environment as e } from 'src/environments/environment.prod';
 export class TollBarComponent implements OnInit {
 
   showToolBar: boolean = false;
+  isLookForMatch: boolean = false;
+
+  userLogged!: User;
 
   constructor(
     public auth: AngularFireAuth,
     private router: Router,
-    private toolBarServiceService: ToolBarServiceService
+    private toolBarServiceService: ToolBarServiceService,
+    private lookForMathServiceService: LookForMathServiceService
   ) { }
 
   ngOnInit(): void {
+    this.instanceObj();
+    this.isLoggedIn().pipe(
+      tap(user => {
+        if (user) {
+          this.toolBarServiceService.emitValueToolBar(true);
+
+          this.userLogged.uid = user.uid;
+          this.userLogged.email = user.email == null ? "Undefined" : user.email;
+        }
+      })
+    ).subscribe();
     this.toolBarServiceService.showToolBar.subscribe(show => {
       this.showToolBar = show;
     });
   }
 
-  logout() {
+  logout(): void {
     this.auth.signOut();
     this.toolBarServiceService.emitValueToolBar(false);
     this.router.navigate([e.REDIRECT_LOGIN]);
+  }
+
+  lookForMatch(): void {
+    this.lookForMathServiceService.addLookForMatchFirebase(this.userLogged);
+    this.isLookForMatch = true;
+  }
+
+  cancelLookForMatch(): void {
+    this.lookForMathServiceService.getLookForMatchByUserFirebase(this.userLogged.uid).subscribe({
+      next: data => {
+        if (data.length > 0) {
+          let docId = data[0].id;
+          this.lookForMathServiceService.deleteLookForMatchFirebase(docId);
+        }
+      }
+    });
+    this.isLookForMatch = false;
+  }
+
+  isLoggedIn() {
+    return this.auth.authState.pipe(first());
+  }
+
+  instanceObj(): void {
+    this.userLogged = {
+      id: "",
+      uid: "",
+      email: ""
+    };
   }
 
 }

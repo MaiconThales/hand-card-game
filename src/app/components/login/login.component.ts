@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.auth.authState.subscribe(authState => {
       if(authState) {
-        this.router.navigate([e.REDIRECT_BOARD]);
+        this.router.navigate([e.REDIRECT_DASHBOARD]);
         this.toolBarServiceService.emitValueToolBar(true);
       }
     });
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider())
       .then(res => {
-        this.router.navigate([e.REDIRECT_BOARD]);
+        this.router.navigate([e.REDIRECT_DASHBOARD]);
         this.toolBarServiceService.emitValueToolBar(true);
       })
       .catch(err => {});

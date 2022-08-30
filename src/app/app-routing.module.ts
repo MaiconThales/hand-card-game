@@ -5,7 +5,8 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/comp
 import { 
   BoardComponent,
   LoginComponent,
-  NotAccessComponent
+  NotAccessComponent,
+  DashboardComponent
 } from 'src/app/components/index';
 
 const redirectUnauthorizedToInfo = () => redirectUnauthorizedTo(['notAcess']);
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'notAcess', component: NotAccessComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToInfo }  },
   { path: 'board', component: BoardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToInfo }  },
 ];
 
