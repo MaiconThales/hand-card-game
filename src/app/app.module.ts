@@ -9,13 +9,19 @@ import { AppComponent } from './app.component';
 // Components
 import  {   BoardComponent, 
             LoginComponent, 
-            NotAccessComponent 
+            NotAccessComponent,
+            TollBarComponent
         } 
 from 'src/app/components/index';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire/compat';
 import { USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
+
+// Angular Material
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 // Config
 import { environment as e } from 'src/environments/environment.prod';
@@ -25,14 +31,18 @@ import { environment as e } from 'src/environments/environment.prod';
     AppComponent,
     BoardComponent,
     LoginComponent,
-    NotAccessComponent
+    NotAccessComponent,
+    TollBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(e.firebaseConfig),
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     { provide: USE_DEVICE_LANGUAGE, useValue: true }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+
+import { ToolBarServiceService } from 'src/app/services';
 
 import firebase from 'firebase/compat/app';
+import { environment as e } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +15,28 @@ import firebase from 'firebase/compat/app';
 export class LoginComponent implements OnInit {
 
   constructor(
-    public auth: AngularFireAuth
+    public auth: AngularFireAuth,
+    private router: Router,
+    private toolBarServiceService: ToolBarServiceService
   ) { }
 
   ngOnInit(): void {
+    this.auth.authState.subscribe(authState => {
+      if(authState) {
+        this.router.navigate([e.REDIRECT_BOARD]);
+        this.toolBarServiceService.emitValueToolBar(true);
+      }
+    });
   }
 
-  login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-  
-  logout() {
-    this.auth.signOut();
+  loginGoogle() {
+    this.auth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider())
+      .then(res => {
+        this.router.navigate([e.REDIRECT_BOARD]);
+        this.toolBarServiceService.emitValueToolBar(true);
+      })
+      .catch(err => {});
   }
 
 }
