@@ -1,2 +1,2 @@
 export * from './tool-bar/tool-bar.service.service';
-export * from './look-for-match/look-for-math.service.service';
+export * from './match/match.service.service';
