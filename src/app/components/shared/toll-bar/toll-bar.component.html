@@ -1,15 +1,20 @@
 <mat-drawer-container class="example-container" autosize>
 
     <!--Side bar-->
-    <mat-drawer [hidden]="!showToolBar" #drawer class="example-sidenav" mode="side">
-        <button mat-raised-button (click)="redirectToMenu(1)" color="primary">DECK</button>
+    <mat-drawer [hidden]="!showToolBar" #drawer [opened]="isShowSideBar" class="example-sidenav" mode="side">
+        <div>
+            <p>E-mail: {{userLogged.email}}</p>
+        </div>
+        <div>
+            <button mat-raised-button (click)="redirectToMenu(1)" color="primary">DECK</button>
+        </div>
     </mat-drawer>
     <div class="example-sidenav-content">
 
         <!--Toll bar-->
         <div *ngIf="showToolBar">
             <mat-toolbar color="primary">
-                <button (click)="drawer.toggle()" mat-icon-button class="example-icon"
+                <button (click)="toggleSideNav()" mat-icon-button class="example-icon"
                     aria-label="Example icon-button with menu icon">
                     <mat-icon>menu</mat-icon>
                 </button>

@@ -18,6 +18,7 @@ export class TollBarComponent implements OnInit {
 
   showToolBar: boolean = false;
   userLogged!: User;
+  isShowSideBar: boolean = false;
 
   constructor(
     public auth: AngularFireAuth,
@@ -54,6 +55,7 @@ export class TollBarComponent implements OnInit {
   }
 
   logout(): void {
+    this.toggleSideNav();
     this.auth.signOut();
     this.toolBarServiceService.emitValueToolBar(false);
     this.router.navigate([e.REDIRECT_LOGIN]);
@@ -72,6 +74,10 @@ export class TollBarComponent implements OnInit {
         this.router.navigate([e.REDIRECT_DASHBOARD]);
         break;
     }
+  }
+
+  toggleSideNav(): void {
+    this.isShowSideBar = !this.isShowSideBar;
   }
 
 }
