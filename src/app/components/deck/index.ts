@@ -1,1 +1,2 @@
-export * from './deck.component';
+export * from './deck-list';
+export * from './deck-dialog-add';
