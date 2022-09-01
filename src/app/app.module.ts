@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,8 @@ import  {   BoardComponent,
             TollBarComponent,
             DashboardComponent,
             LookForMatchComponent,
-            DeckComponent
+            DeckComponent,
+            DeckDialogAddComponent
         } 
 from 'src/app/components/index';
 
@@ -47,11 +49,13 @@ import { environment as e } from 'src/environments/environment.prod';
     TollBarComponent,
     DashboardComponent,
     LookForMatchComponent,
-    DeckComponent
+    DeckComponent,
+    DeckDialogAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(e.firebaseConfig),
     BrowserAnimationsModule,
     FlexLayoutModule,
