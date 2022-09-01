@@ -6,7 +6,8 @@ import {
   BoardComponent,
   LoginComponent,
   NotAccessComponent,
-  DashboardComponent
+  DashboardComponent,
+  DeckComponent
 } from 'src/app/components/index';
 
 const redirectUnauthorizedToInfo = () => redirectUnauthorizedTo(['notAcess']);
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'notAcess', component: NotAccessComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToInfo }  },
   { path: 'board', component: BoardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToInfo }  },
+  { path: 'deck', component: DeckComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToInfo }  },
 ];
 
 @NgModule({

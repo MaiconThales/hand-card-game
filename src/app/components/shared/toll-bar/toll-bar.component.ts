@@ -63,4 +63,15 @@ export class TollBarComponent implements OnInit {
     this.router.navigate([e.REDIRECT_DASHBOARD]);
   }
 
+  redirectToMenu(value: number): void {
+    switch (value) {
+      case 1:
+        this.router.navigate([e.REDIRECT_DECK]);
+        break;
+      default:
+        this.router.navigate([e.REDIRECT_DASHBOARD]);
+        break;
+    }
+  }
+
 }

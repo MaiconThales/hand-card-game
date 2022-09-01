@@ -1,13 +1,28 @@
-<div *ngIf="showToolBar">
-    <mat-toolbar color="primary">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span id="navBarName" (click)="redirectToDashboard();">Hand Card</span>
-        <span class="example-spacer"></span>
-        <app-look-for-match [infoUser]="userLogged"></app-look-for-match>
-        <button mat-icon-button (click)="logout()" aria-label="Logout">
-            <mat-icon>exit_to_app</mat-icon>
-        </button>
-    </mat-toolbar>
-</div>
+<mat-drawer-container class="example-container" autosize>
+
+    <!--Side bar-->
+    <mat-drawer [hidden]="!showToolBar" #drawer class="example-sidenav" mode="side">
+        <button mat-raised-button (click)="redirectToMenu(1)" color="primary">DECK</button>
+    </mat-drawer>
+    <div class="example-sidenav-content">
+
+        <!--Toll bar-->
+        <div [hidden]="!showToolBar">
+            <mat-toolbar color="primary">
+                <button (click)="drawer.toggle()" mat-icon-button class="example-icon"
+                    aria-label="Example icon-button with menu icon">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span id="navBarName" (click)="redirectToDashboard();">Hand Card</span>
+                <span class="example-spacer"></span>
+                <app-look-for-match [infoUser]="userLogged"></app-look-for-match>
+                <button mat-icon-button (click)="logout()" aria-label="Logout">
+                    <mat-icon>exit_to_app</mat-icon>
+                </button>
+            </mat-toolbar>
+        </div>
+
+        <!--Content page app-->
+        <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>

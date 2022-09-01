@@ -12,7 +12,8 @@ import  {   BoardComponent,
             NotAccessComponent,
             TollBarComponent,
             DashboardComponent,
-            LookForMatchComponent
+            LookForMatchComponent,
+            DeckComponent
         } 
 from 'src/app/components/index';
 
@@ -26,6 +27,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 // Config
 import { environment as e } from 'src/environments/environment.prod';
@@ -38,7 +40,8 @@ import { environment as e } from 'src/environments/environment.prod';
     NotAccessComponent,
     TollBarComponent,
     DashboardComponent,
-    LookForMatchComponent
+    LookForMatchComponent,
+    DeckComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { environment as e } from 'src/environments/environment.prod';
     MatToolbarModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule
   ],
   providers: [
     { provide: USE_DEVICE_LANGUAGE, useValue: true }
