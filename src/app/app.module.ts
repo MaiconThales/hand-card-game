@@ -11,7 +11,8 @@ import  {   BoardComponent,
             LoginComponent, 
             NotAccessComponent,
             TollBarComponent,
-            DashboardComponent
+            DashboardComponent,
+            LookForMatchComponent
         } 
 from 'src/app/components/index';
 
@@ -36,7 +37,8 @@ import { environment as e } from 'src/environments/environment.prod';
     LoginComponent,
     NotAccessComponent,
     TollBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    LookForMatchComponent
   ],
   imports: [
     BrowserModule,

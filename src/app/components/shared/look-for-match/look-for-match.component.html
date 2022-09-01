@@ -1,0 +1,10 @@
+<div>
+    <button mat-raised-button [disabled]="isDisabledBtnSearcMatch" (click)="lookForMatch();">Procurar partida</button>
+</div>
+
+<div class="container" *ngIf="isLookForMatch">
+    <mat-spinner></mat-spinner>
+    <div>
+        <button mat-raised-button (click)="cancelLookForMatch()">Cancelar</button>
+    </div>
+</div>

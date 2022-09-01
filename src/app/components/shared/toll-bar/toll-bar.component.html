@@ -5,16 +5,9 @@
         </button>
         <span>Hand Card</span>
         <span class="example-spacer"></span>
-        <button mat-raised-button [disabled]="isDisabledBtnSearcMatch" (click)="lookForMatch()">Procurar partida</button>
+        <app-look-for-match [infoUser]="userLogged"></app-look-for-match>
         <button mat-icon-button (click)="logout()" aria-label="Logout">
             <mat-icon>exit_to_app</mat-icon>
         </button>
     </mat-toolbar>
-</div>
-
-<div class="container" *ngIf="isLookForMatch">
-    <mat-spinner></mat-spinner>
-    <div>
-        <button mat-raised-button (click)="cancelLookForMatch()">Cancelar</button>
-    </div>
 </div>
