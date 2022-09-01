@@ -7,7 +7,7 @@
     <div class="example-sidenav-content">
 
         <!--Toll bar-->
-        <div [hidden]="!showToolBar">
+        <div *ngIf="showToolBar">
             <mat-toolbar color="primary">
                 <button (click)="drawer.toggle()" mat-icon-button class="example-icon"
                     aria-label="Example icon-button with menu icon">

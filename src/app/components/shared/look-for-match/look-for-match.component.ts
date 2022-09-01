@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class LookForMatchComponent implements OnInit {
   @Input() infoUser!: User;
 
   isLookForMatch: boolean = false;
-  isDisabledBtnSearcMatch: boolean = false;
+  isDisabledBtnSearcMatch!: boolean;
 
   usersLookForMatch: User[] = [];
   matchServersAvailable: Match[] = [];
@@ -27,7 +27,7 @@ export class LookForMatchComponent implements OnInit {
     public auth: AngularFireAuth,
     private router: Router,
     private matchServiceService: MatchServiceService
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
     this.instanceObj();
@@ -56,41 +56,50 @@ export class LookForMatchComponent implements OnInit {
   }
 
   getListMatch(): void {
+    this.getMatchByUser1();
+  }
+
+  getMatchByUser1(): void {
     this.matchServiceService.getMatchByUser1(this.infoUser.uid).subscribe({
       next: dataUser1 => {
-        if(dataUser1.length == 0) {
-          this.matchServiceService.getMatchByUser2(this.infoUser.uid).subscribe({
-            next: dataUser2 => {
-              if(dataUser2.length == 0) {
-                this.matchServiceService.getAllMatchAvailable().subscribe({
-                  next: data => {
-                    this.matchServersAvailable = data;
-                    this.isDisabledBtnSearcMatch = false;
-                  },
-                  error: err => {}
-                });
-              } else {
-                this.isLookForMatch = false;
-                this.isDisabledBtnSearcMatch = true;
-                this.router.navigate([e.REDIRECT_BOARD]);
-              }
-            },
-            error: err => {}
-          });
+        if (dataUser1.length == 0) {
+          this.getMatchByUser2();
         } else {
           this.isLookForMatch = false;
-          this.isDisabledBtnSearcMatch = true;
           this.router.navigate([e.REDIRECT_BOARD]);
         }
       },
-      error: err => {}
+      error: err => { }
+    });
+  }
+
+  getMatchByUser2(): void {
+    this.matchServiceService.getMatchByUser2(this.infoUser.uid).subscribe({
+      next: dataUser2 => {
+        if (dataUser2.length == 0) {
+          this.getAllMatchAvailable();
+        } else {
+          this.isLookForMatch = false;
+          this.router.navigate([e.REDIRECT_BOARD]);
+        }
+      },
+      error: err => { }
+    });
+  }
+
+  getAllMatchAvailable(): void {
+    this.matchServiceService.getAllMatchAvailable().subscribe({
+      next: data => {
+        this.matchServersAvailable = data;
+      },
+      error: err => { }
     });
   }
 
   lookForMatch(): void {
     this.isLookForMatch = true;
     this.isDisabledBtnSearcMatch = true;
-    if(this.matchServersAvailable.length == 0) {
+    if (this.matchServersAvailable.length == 0) {
       this.match.user1 = this.infoUser;
       this.matchServiceService.addMatchFirebase(this.match);
     } else {
@@ -111,14 +120,14 @@ export class LookForMatchComponent implements OnInit {
     findUser1 = this.matchServersAvailable.find(e1 => {
       return e1.user1.uid == this.infoUser.uid
     });
-    if(findUser1 == undefined) {
+    if (findUser1 == undefined) {
       findUser2 = this.matchServersAvailable.find(e2 => {
-        if(e2.user2 != undefined) {
+        if (e2.user2 != undefined) {
           return e2.user2.uid == this.infoUser.uid
         }
         return undefined;
       });
-      if(findUser2 != undefined) {
+      if (findUser2 != undefined) {
         this.matchServiceService.deleteMatchFirebase(findUser2.id);
       }
     } else {
