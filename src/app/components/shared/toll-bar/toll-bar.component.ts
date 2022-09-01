@@ -59,4 +59,8 @@ export class TollBarComponent implements OnInit {
     this.router.navigate([e.REDIRECT_LOGIN]);
   }
 
+  redirectToDashboard(): void {
+    this.router.navigate([e.REDIRECT_DASHBOARD]);
+  }
+
 }

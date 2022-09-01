@@ -3,7 +3,7 @@
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>Hand Card</span>
+        <span id="navBarName" (click)="redirectToDashboard();">Hand Card</span>
         <span class="example-spacer"></span>
         <app-look-for-match [infoUser]="userLogged"></app-look-for-match>
         <button mat-icon-button (click)="logout()" aria-label="Logout">

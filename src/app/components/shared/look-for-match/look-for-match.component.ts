@@ -65,6 +65,7 @@ export class LookForMatchComponent implements OnInit {
                 this.matchServiceService.getAllMatchAvailable().subscribe({
                   next: data => {
                     this.matchServersAvailable = data;
+                    this.isDisabledBtnSearcMatch = false;
                   },
                   error: err => {}
                 });
