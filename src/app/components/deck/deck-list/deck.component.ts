@@ -7,6 +7,8 @@ import { DeckServiceService } from 'src/app/services';
 import { Deck } from 'src/app/models';
 import { DeckDialogAddComponent } from '../deck-dialog-add';
 import { MatDialog } from '@angular/material/dialog';
+import { DeckDialogAddCardComponent } from '../deck-dialog-add-card';
+import { DeckDialogViewCardsComponent } from '../deck-dialog-view-cards';
 
 @Component({
   selector: 'app-deck',
@@ -67,6 +69,50 @@ export class DeckComponent implements OnInit {
           case 2:
             this.deckServiceService.updateDeckFirebase(result);
             break;
+        }
+      }
+    });
+  }
+
+  openDialogCardRegister(type: number, obj: Deck, index: any): void {
+    const dialogRef = this.dialog.open(DeckDialogAddCardComponent, {
+      width: '500px',
+      height: '250px',
+      data: {
+        deck: obj,
+        indexCard: index
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        switch (type) {
+          case 1:
+            obj.cards.push(result);
+            this.deckServiceService.updateDeckFirebase(obj);
+            break;
+          case 2:
+            obj.cards[index] = result;
+            this.deckServiceService.updateDeckFirebase(obj);
+            break;
+        }
+      }
+    });
+  }
+
+  openDialogViewCard(obj: Deck): void {
+    const dialogRef = this.dialog.open(DeckDialogViewCardsComponent, {
+      width: '1000px',
+      height: '800px',
+      data: obj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {//edit
+        if(result.nameDeck == undefined) {
+          this.openDialogCardRegister(2, obj, result);
+        } else {//delete
+          this.deckServiceService.updateDeckFirebase(result);
         }
       }
     });

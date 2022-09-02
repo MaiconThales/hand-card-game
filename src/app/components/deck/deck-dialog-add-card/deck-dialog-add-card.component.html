@@ -1,0 +1,56 @@
+<form [formGroup]="cardForm" class="card-form">
+    <!--Title-->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        Criar CARD
+    </div>
+
+    <!-- Name -->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <mat-form-field appearance="standard">
+            <mat-label>
+                Nome
+            </mat-label>
+            <input matInput id="nameCard" type="text" formControlName="nameCard">
+            <mat-error *ngIf="cardForm.controls['nameCard'].hasError('required')">
+                Test <strong>Test</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <!-- Damage and life -->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <mat-form-field appearance="standard">
+            <mat-label>
+                Damage
+            </mat-label>
+            <input matInput id="damage" type="number" formControlName="damage">
+            <mat-error *ngIf="cardForm.controls['damage'].hasError('required')">
+                Test <strong>Test</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>
+                Life
+            </mat-label>
+            <input matInput id="life" type="number" formControlName="life">
+            <mat-error *ngIf="cardForm.controls['life'].hasError('required')">
+                Test <strong>Test</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <!--Btns-->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <div>
+            <button (click)="onNoClick();" mat-icon-button matTooltip="TEST1" matTooltipPosition="left">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div>
+            <button (click)="onSubmit()" type="submit" [disabled]="!cardForm.valid"
+                mat-icon-button matTooltip="TEST1" matTooltipPosition="after">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+</form>

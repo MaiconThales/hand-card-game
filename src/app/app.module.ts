@@ -15,7 +15,8 @@ import  {   BoardComponent,
             DashboardComponent,
             LookForMatchComponent,
             DeckComponent,
-            DeckDialogAddComponent
+            DeckDialogAddComponent,
+            DeckDialogAddCardComponent
         } 
 from 'src/app/components/index';
 
@@ -36,9 +37,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 
 // Config
 import { environment as e } from 'src/environments/environment.prod';
+import { DeckDialogViewCardsComponent } from './components/deck/deck-dialog-view-cards/deck-dialog-view-cards.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,9 @@ import { environment as e } from 'src/environments/environment.prod';
     DashboardComponent,
     LookForMatchComponent,
     DeckComponent,
-    DeckDialogAddComponent
+    DeckDialogAddComponent,
+    DeckDialogAddCardComponent,
+    DeckDialogViewCardsComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,9 @@ import { environment as e } from 'src/environments/environment.prod';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule,
+    MatCardModule
   ],
   providers: [
     { provide: USE_DEVICE_LANGUAGE, useValue: true }
