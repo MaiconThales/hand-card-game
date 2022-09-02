@@ -1,5 +1,5 @@
 export interface Card {
-    id: number;
+    id: string;
     nameCard: string;
     damage: number;
     life: number;
