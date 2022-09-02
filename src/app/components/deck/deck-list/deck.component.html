@@ -28,7 +28,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Nome
                     </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.nameDeck}} </td>
                 </ng-container>
 
                 <!-- Options Column -->
@@ -40,10 +40,10 @@
                         <button mat-icon-button matTooltip="TEST1" matTooltipPosition="left">
                             <mat-icon>add_photo_alternate</mat-icon>
                         </button>
-                        <button mat-icon-button matTooltip="TEST2" matTooltipPosition="above">
+                        <button mat-icon-button (click)="openDialogRegister(2, row)" matTooltip="TEST2" matTooltipPosition="above">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-icon-button matTooltip="TEST3" matTooltipPosition="right">
+                        <button mat-icon-button (click)="deleteDeck(row.id)" matTooltip="TEST3" matTooltipPosition="right">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>

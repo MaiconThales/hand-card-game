@@ -26,4 +26,28 @@ export class DeckServiceService {
     return this.items;
   }
 
+  addDeckFirebase(deck: Deck): void {
+    this.deckCollections.add(deck)
+      .then(() => { })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
+  }
+
+  updateDeckFirebase(deck: Deck): void {
+    this.afs.doc<Deck>(`${this.DECK_COLLECTION}/${deck.id}`)
+      .update(deck)
+      .then(res => { })
+      .catch(err => { });
+  }
+
+  deleteDeckFirebase(documentId: string): void {
+    this.afs.doc<Deck>(`${this.DECK_COLLECTION}/${documentId}`)
+      .delete()
+      .then(res => { })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
+  }
+
 }

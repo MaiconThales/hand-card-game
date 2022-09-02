@@ -1,1 +1,34 @@
-<p>deck-dialog-add works!</p>
+<form [formGroup]="deckForm" class="deck-form">
+    <!--Title-->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        Criar DECK
+    </div>
+
+    <!-- Name -->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <mat-form-field appearance="standard">
+            <mat-label>
+                Nome
+            </mat-label>
+            <input matInput id="nameDeck" type="text" formControlName="nameDeck">
+            <mat-error *ngIf="deckForm.controls['nameDeck'].hasError('required')">
+                Test <strong>Test</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <!--Btns-->
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <div>
+            <button (click)="onNoClick();" mat-icon-button matTooltip="TEST1" matTooltipPosition="left">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div>
+            <button class="button-general-save" (click)="onSubmit()" type="submit" [disabled]="!deckForm.valid"
+                mat-icon-button matTooltip="TEST1" matTooltipPosition="after">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+</form>

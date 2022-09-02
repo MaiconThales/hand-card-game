@@ -54,24 +54,26 @@ export class DeckComponent implements OnInit {
   openDialogRegister(type: number, object: any): void {
     const dialogRef = this.dialog.open(DeckDialogAddComponent, {
       width: '500px',
-      height: '270px',
-      data: {
-        
-      }
+      height: '180px',
+      data: object
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
         switch (type) {
           case 1:
-            //this.saveMenu(result);
+            this.deckServiceService.addDeckFirebase(result);
             break;
           case 2:
-            //this.updateMenu(result);
+            this.deckServiceService.updateDeckFirebase(result);
             break;
         }
       }
     });
+  }
+
+  deleteDeck(documentId: string): void {
+    this.deckServiceService.deleteDeckFirebase(documentId);
   }
 
 }
