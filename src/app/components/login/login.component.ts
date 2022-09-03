@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       .then(res => {
         this.router.navigate([e.REDIRECT_DASHBOARD]);
         this.toolBarServiceService.emitValueToolBar(true);
+        window.location.reload();
       })
       .catch(err => {});
   }

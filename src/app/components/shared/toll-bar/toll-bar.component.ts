@@ -55,7 +55,9 @@ export class TollBarComponent implements OnInit {
   }
 
   logout(): void {
-    this.toggleSideNav();
+    if (this.isShowSideBar) {
+      this.toggleSideNav();
+    }
     this.auth.signOut();
     this.toolBarServiceService.emitValueToolBar(false);
     this.router.navigate([e.REDIRECT_LOGIN]);
