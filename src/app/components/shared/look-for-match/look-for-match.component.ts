@@ -52,7 +52,8 @@ export class LookForMatchComponent implements OnInit {
   }
 
   getNumberRandom(maxPosition: number): number {
-    return Math.floor(maxPosition);
+    maxPosition = maxPosition - 1;
+    return Math.floor(Math.random() * maxPosition);
   }
 
   getListMatch(): void {
@@ -103,7 +104,7 @@ export class LookForMatchComponent implements OnInit {
       this.match.user1 = this.infoUser;
       this.matchServiceService.addMatchFirebase(this.match);
     } else {
-      let position = this.getNumberRandom(this.matchServersAvailable.length - 1);
+      let position = this.getNumberRandom(this.matchServersAvailable.length);
       let match = this.matchServersAvailable[position];
       match.isAvailable = false;
       match.user2 = this.infoUser;
