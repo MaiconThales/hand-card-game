@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 import { DeckServiceService } from 'src/app/services';
 import { Deck } from 'src/app/models';
 import { DeckDialogAddComponent } from '../deck-dialog-add';
-import { MatDialog } from '@angular/material/dialog';
 import { DeckDialogAddCardComponent } from '../deck-dialog-add-card';
 import { DeckDialogViewCardsComponent } from '../deck-dialog-view-cards';
 
@@ -25,7 +25,7 @@ export class DeckComponent implements OnInit {
 
   constructor(
     private deckServiceService: DeckServiceService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {

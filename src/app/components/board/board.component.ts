@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Deck, Match } from 'src/app/models';
 
 import { SharedDataService } from 'src/app/services';
 
@@ -10,15 +11,19 @@ import { SharedDataService } from 'src/app/services';
 export class BoardComponent implements OnInit {
 
   userLogged: any;
+  match!: Match;
+  decks: Deck[] = [];
 
   constructor(
     private sharedDataService: SharedDataService
   ) { }
 
   ngOnInit(): void {
-    //this.sharedDataService.currentMessage.subscribe(message => (this.selectedMessage = message));
     this.sharedDataService.currentMessageUser.subscribe(message => (this.userLogged = message));
-    console.log("Test: ", this.userLogged)
+    this.sharedDataService.currentMessageMatch.subscribe(message => (this.match = message));
+    console.log("Test1: ", this.userLogged)
+    console.log("Test2: ", this.match)
+    console.log("Test3: ", this.decks)
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
-import { MatchServiceService } from 'src/app/services';
+import { MatchServiceService, SharedDataService } from 'src/app/services';
 
 import { User, Match } from 'src/app/models';
 
@@ -26,7 +26,8 @@ export class LookForMatchComponent implements OnInit {
   constructor(
     public auth: AngularFireAuth,
     private router: Router,
-    private matchServiceService: MatchServiceService
+    private matchServiceService: MatchServiceService,
+    private sharedDataService: SharedDataService
   ) { }
 
   ngOnInit(): void {
@@ -66,6 +67,7 @@ export class LookForMatchComponent implements OnInit {
         if (dataUser1.length == 0) {
           this.getMatchByUser2();
         } else {
+          this.sharedDataService.changeMessageMatch(dataUser1[0]);
           this.isLookForMatch = false;
           this.router.navigate([e.REDIRECT_BOARD]);
         }
@@ -80,6 +82,7 @@ export class LookForMatchComponent implements OnInit {
         if (dataUser2.length == 0) {
           this.getAllMatchAvailable();
         } else {
+          this.sharedDataService.changeMessageMatch(dataUser2[0]);
           this.isLookForMatch = false;
           this.router.navigate([e.REDIRECT_BOARD]);
         }
