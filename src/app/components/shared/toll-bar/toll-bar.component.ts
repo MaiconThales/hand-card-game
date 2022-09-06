@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { first, tap } from 'rxjs/operators';
 
-import { ToolBarServiceService, InfoStorageService } from 'src/app/services';
+import { ToolBarServiceService, SharedDataService } from 'src/app/services';
 
 import { User } from 'src/app/models';
 
@@ -24,7 +24,7 @@ export class TollBarComponent implements OnInit {
     public auth: AngularFireAuth,
     private router: Router,
     private toolBarServiceService: ToolBarServiceService,
-    private infoStorageService: InfoStorageService
+    private sharedDataService: SharedDataService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class TollBarComponent implements OnInit {
           this.toolBarServiceService.emitValueToolBar(true);
           this.userLogged.uid = user.uid;
           this.userLogged.email = user.email == null ? "Undefined" : user.email;
-          this.infoStorageService.saveToken(this.userLogged);
+          this.sharedDataService.changeMessageUser(this.userLogged);
         }
       })
     ).subscribe();
@@ -63,7 +63,6 @@ export class TollBarComponent implements OnInit {
     this.auth.signOut();
     this.toolBarServiceService.emitValueToolBar(false);
     this.router.navigate([e.REDIRECT_LOGIN]);
-    this.infoStorageService.signOut();
   }
 
   redirectToDashboard(): void {
